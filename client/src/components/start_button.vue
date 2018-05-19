@@ -14,7 +14,7 @@
 			return {
 				user: {
 					monthly_salary: '',
-					savings: '',
+					savings: ''
 				}
 			}
 		},
