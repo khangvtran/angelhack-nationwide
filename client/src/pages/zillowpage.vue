@@ -1,26 +1,35 @@
 <template>
 	<div>
-		<p>this is the zillowpage</p>
 		<form @submit.prevent="submitHandler">
 			<label for="zipcode">Zip Code</label>
 			<input type="text" name="zipcode" id="zipcode" v-model="zipcode.number">
 			<input type="submit" name="submit" value="submit">
 		</form>
-		<table></table>
+		<table>{{res}}</table>
 	</div>
 </template>
 
 <script>
+	import NationService from '@/services/Nationwide-Api'
 	export default {
 		data(){
-			zipcode: {
-				number: ""
+			return {
+				zipcode: {
+					number: ""
+				},
+				res: null
 			}
 		},
 		methods: {
-			submitHandler(){
-
+			async submitHandler(){
+				var data = {
+					"zipcode": this.zipcode.number,
+					"monthly_salary": this.$localStorage.get('monthly_salary'),
+					"savings": this.$localStorage.get('savings')
+				}
+				this.res = await NationService.postToZipcode(data)
 			}
+
 		}
 	}
 </script>
