@@ -27,9 +27,10 @@ def getBankBalances(id):
 
 @app.route("/api/processTotalFunds", methods = ['POST'])
 def getTotalFunds():
-	data = request.data
+	data = request.data.json()
 	print(type(data))
 	print(data)	
+	return jsonify(data), 200
 
 
 
