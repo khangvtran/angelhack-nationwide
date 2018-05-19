@@ -25,7 +25,7 @@ def getBankBalances(id):
     balance = sum(account["balance"] for account in accounts.json() if account["customerId"] == id)
     return balance
 
-@app.route("/api/processTotalFunds")
+@app.route("/api/processTotalFunds", methods = ['POST'])
 def getTotalFunds():
 	data = request.data
 	print(type(data))
