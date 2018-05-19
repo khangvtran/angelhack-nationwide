@@ -13,7 +13,7 @@
     data() {
       return {
         user: {
-          monthy_salary: JSON.parse(this.$localStorage.get("user")).monthly_salary,
+          monthly_salary: JSON.parse(this.$localStorage.get("user")).monthly_salary,
           savings: JSON.parse(this.$localStorage.get("user")).savings,
           percent: '',
           waitmonths: ''
