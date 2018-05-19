@@ -1,12 +1,14 @@
 import requests
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 
 mock = "http://nw-angelhack-2018-mocks.us-east-1.elasticbeanstalk.com/"
-app = Flask(__name__)
+app = Flask(__name__,
+    static_folder = "./../client/dist/static",
+    template_folder = "./../client/dist")
 
 @app.route("/")
 def hello():
-    return "Hello World!"
+    return render_template("index.html")
 
 @app.route("/api/customerBalances/<int:id>")
 def getStuff(id):
