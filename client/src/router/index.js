@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/pages/HelloWorld'
-import start_button from '@/components/start_button'
+import StartButton from '@/components/start_button'
 import zillowpage from '@/pages/zillowpage'
 import additionalinfo from '@/components/additionalinfo'
 
@@ -15,17 +15,17 @@ export default new Router({
       component: HelloWorld
     },
     {
-    	path:'/test',
-    	name: 'start_button',
-    	component: start_button
+      path: '/test',
+      name: 'start_button',
+      component: StartButton
     },
     {
-    	path:'/placeholder',
-    	name: 'zillowpage',
-    	component: zillowpage
+      path: '/placeholder',
+      name: 'zillowpage',
+      component: zillowpage
     },
     {
-      path:'/test2',
+      path: '/test2',
       name: 'additionalinfo',
       component: additionalinfo
     }
