@@ -11,15 +11,13 @@ def hello():
     return render_template("index.html")
 
 
-
 @app.route("/api/customerBalances/<int:id>")
 def getStuff(id):
-    customers = requests.get(mock+"/customers")
+    customers = requests.get(mock+"/customers") #<class 'requests.models.Response'>, use .json() to convert to list
     monthly_income = int([customer["householdIncome"] for customer in customers.json() if customer["id"] == id][0]/12)
     balance = getBankBalances(id)
     dict = {"monthly_salary":monthly_income, "savings":balance}
     return jsonify(dict), 200
-
 
 
 def getBankBalances(id):
@@ -27,7 +25,23 @@ def getBankBalances(id):
     balance = sum(account["balance"] for account in accounts.json() if account["customerId"] == id)
     return balance
 
+@app.route("/api/processTotalFunds", methods = ['POST'])
+def getTotalFunds():
+	data = request.data.json()
+	print(type(data))
+	print(data)	
+	return jsonify(data), 200
 
+
+
+'''
+{
+	"monthly_salary": "200000",
+	"savings": "1000000",
+	"percent": "30",
+	"waitmonths": "12"
+}
+'''
 
 if __name__ == "__main__":
     app.run(host='127.0.0.1', debug=True)
