@@ -9,23 +9,23 @@
 </template>
 
 <script scoped>
-  export default {
-    data() {
-      return {
-        user: {
-          monthly_salary: JSON.parse(this.$localStorage.get("user")).monthly_salary,
-          savings: JSON.parse(this.$localStorage.get("user")).savings,
-          percent: '',
-          waitmonths: ''
-        }
-      }
-    },
-    methods: {
-      submitHandler(){
-        this.$localStorage.set("user", JSON.stringify(this.user))
-        let object = this.$localStorage.get('user')
-        console.log(object)
+export default {
+  data () {
+    return {
+      user: {
+        monthly_salary: JSON.parse(this.$localStorage.get('user')).monthly_salary,
+        savings: JSON.parse(this.$localStorage.get('user')).savings,
+        percent: '',
+        waitmonths: ''
       }
     }
+  },
+  methods: {
+    submitHandler () {
+      this.$localStorage.set('user', JSON.stringify(this.user))
+      let object = this.$localStorage.get('user')
+      console.log(object)
+    }
   }
+}
 </script>
