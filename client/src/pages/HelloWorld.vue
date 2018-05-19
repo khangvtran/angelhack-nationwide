@@ -1,10 +1,9 @@
 <template>
   <div class="hello">
       <button type="button" name="button">Start</button>
-      <button type="button" name="button">Nationwide</button>
-    <form class="" action="index.html" method="post">
-      <input type="text">
-      <input type="text">
+    <form @submit="getData">
+      <input v-model="form.id" type="text">
+      <button type="submit" name="button">Nationwide</button>
     </form>
   </div>
 </template>
@@ -15,11 +14,15 @@ export default {
   name: 'HelloWorld',
   data () {
     return {
+      form: {
+        id: ''
+      }
     }
   },
   methods: {
-    async getData () {
-      const response = await NationService.get()
+    async getData (e) {
+      e.preventDefault()
+      const response = await NationService.getNationwide(this.form.id)
       console.log(response)
     }
   },
