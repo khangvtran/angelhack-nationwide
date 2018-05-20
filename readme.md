@@ -20,7 +20,7 @@ in the terminal. This will allow the web application to be available for viewing
 
 `python main.py`
 
-In the *backend* directory.
+In the *backend* directory. 
 
 ## API's used:
 
@@ -28,7 +28,7 @@ In the *backend* directory.
 
 ## How does it work?
 
-Iono
+Vue.js front-end with Google Material Design for UI/UX and Javascript as the programming language.
 
 ## Features
 
@@ -52,6 +52,7 @@ Iono
 
 ## How does it work?
 
+We used Python to interact with REST APIs for the data
 
 ## Features
 
@@ -61,9 +62,11 @@ Iono
 
 + Access to metadata on available housing such as list price, number of bedrooms, and number of bathrooms.
 
-## Hosting
+# Other Components
 
 + Hosted on [AWS Elastic Beanstalk](https://aws.amazon.com/elasticbeanstalk/) for deployment of the web application.
+
++ Downloaded [Postman](https://www.getpostman.com/) to great a POST request from the results of our user input to the web application and send the zipcode, price, monthly salary, savings, and other financial information for back-end processing.
 
 
 ## What We Learned
