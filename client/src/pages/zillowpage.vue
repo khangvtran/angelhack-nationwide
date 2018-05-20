@@ -18,8 +18,10 @@
           @click="zillowcall(m)"
         ></GmapMarker>
     </GmapMap>
-    <div id="zillow">
+    <div id="zillow" v-if="house">
       <h1>{{house}}</h1>
+      <p v-if="house.totalRooms">Total rooms: {{house.totalRooms}}</p>
+      <p></p>
     </div>
   </div>
 </template>
@@ -51,7 +53,7 @@ export default {
     },
     async zillowcall(house){
       let res = await NationService.callZillowApi(house.address)
-      this.house = res
+      this.house = res.data.result
     },
     geolocate: function() {
       navigator.geolocation.getCurrentPosition(position => {
