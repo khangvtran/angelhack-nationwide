@@ -108,10 +108,10 @@ export default {
     goBack () {
       this.$router.go(-1)
     },
-    calcuateMortgage(house){
+    calcuateMortgage (house) {
       let total = house.zestimate.amount
       console.log(total)
-      let user = JSON.parse(this.$localStorage.get("user"))
+      let user = JSON.parse(this.$localStorage.get('user'))
       let mortgage = parseInt(user.mortgage_years) * 12 * parseInt(user.monthly_salary) * (parseInt(user.percent) / 100)
       console.log(mortgage)
       let result = total - parseInt(user.savings) - mortgage
