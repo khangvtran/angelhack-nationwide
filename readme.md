@@ -2,7 +2,7 @@
 
 ## App Description
 
-NaviGarden is a web application that assists millenial home buyers in navigating the complex chore of home buying, preparing them to be responsible home buyers. With a simple web browser, your typical millenial can input their financial data, visualize nearby homes they can afford, and make responsible decisions on purchasing their first home. 
+In [Nationwide Hackathon May 2018](http://nationwidehackathon.com/), five men came together to produce a wondrous creation of technology: NaviGarden. NaviGarden is a web application that assists millenial home buyers in navigating the complex chore of home buying, preparing them to be responsible home buyers. With a simple web browser, your typical millenial can input their financial data, visualize nearby homes they can afford, and make responsible decisions on purchasing their first home. 
 
 ## Design Elements 
 
@@ -46,21 +46,28 @@ Iono
 
 ## API's used:
 
++ [Nationwide API](https://app.swaggerhub.com/apis/NationwideInsurance/Hackathon-May-2018/1.0.0)
+
 + [Zillow API](https://www.zillow.com/howto/api/APIOverview.htm)
 
-+ [Nationwide API](https://app.swaggerhub.com/apis/NationwideInsurance/Hackathon-May-2018/1.0.0)
++ [Google Maps API](https://developers.google.com/maps/documentation/javascript/tutorial)
 
 ## How does it work?
 
+
 ## Features
 
++ Flexibility in deployment using the Flask microframework
+
++ Produce stunning Google Maps API visualizations to see nearby homes that they can afford and have access to.
+
++ Access to metadata on available housing such as list price, number of bedrooms, and number of bathrooms.
 
 ## What We Learned
 
-**Front end:**
-+ We used Vue.js as a framework to build an intuitive user-interface that walks the user through inputting their financial information and navigating a worthy decision.
-Npm install
++ Develop a web application that answers a specific business problem addressed by Nationwide's needs
+
++ More stuff
 
 
-**Back end:** 
 
