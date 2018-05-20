@@ -1,11 +1,20 @@
 <template>
-  <div class="hello">
-      <router-link :to="{ name: 'start_button' }" type="button" name="button"><button type="button" name="button">Non Nationwide Members</button></router-link>
-    <form @submit="getData">
-      <input v-model="form.id" type="text">
-      <button type="submit" name="button">Nationwide</button>
-    </form>
-  </div>
+  <v-layout>
+    <v-flex xs12 sm8 offset-sm2>
+      <v-card>
+        <v-toolbar dark color="primary">
+          <v-toolbar-title>Start Planning!</v-toolbar-title>
+        </v-toolbar>
+        <v-card-actions>
+          <v-btn :to="{ name: 'start_button' }" flat name="button">Non Nationwide Members</v-btn>
+          <form @submit="getData">
+            <input v-model="form.id" type="text">
+            <v-btn flat type="submit" name="button">Nationwide</v-btn>
+          </form>
+        </v-card-actions>
+      </v-card>
+    </v-flex>
+  </v-layout>
 </template>
 
 <script>
