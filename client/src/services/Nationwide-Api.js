@@ -18,6 +18,6 @@ export default {
     // return [{'id': 'form data is working right now!'}]
   },
   callZillowApi(address){
-    return Api().get('', address, headers)
+    return Api().post('callZillowApi', address, headers)
   }
 }

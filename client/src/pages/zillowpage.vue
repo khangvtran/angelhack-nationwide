@@ -15,11 +15,11 @@
           :key="index"
           v-for="(m, index) in houses"
           :position="m.position"
-          @click="center=m.position"
-        ></GmapMarker>>
-    </GmapMap>>
-    <div id="zillow" style="visibility: hidden;">
-      <h1>This will be the zillow element</h1>
+          @click="zillowcall(m)"
+        ></GmapMarker>
+    </GmapMap>
+    <div id="zillow">
+      <h1>{{house}}</h1>
     </div>
   </div>
 </template>
@@ -49,13 +49,9 @@ export default {
       this.addMarkers(res)
       console.log(res.data.property)
     },
-    zillowcall(house){
-      // let res = await NationService.zillowcall(house.address)
-      var table = document.getElementById('table')
-      table.style.visibility = "hidden"
-      var zillow = document.getElementById('zillow')
-      zillow.style.visibility = "visible"
-      // this.house = res
+    async zillowcall(house){
+      let res = await NationService.callZillowApi(house.address)
+      this.house = res
     },
     geolocate: function() {
       navigator.geolocation.getCurrentPosition(position => {
@@ -71,7 +67,8 @@ export default {
           position: {
             lat: parseFloat(res.data.property[i].location.latitude),
             lng: parseFloat(res.data.property[i].location.longitude)
-          }
+          },
+          address: res.data.property[i].address
         }
         this.houses.push(house)
       }
