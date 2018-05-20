@@ -6,11 +6,14 @@
       <input type="text" name="zipcode" id="zipcode" pattern="[0-9]{5}" maxlength="5" title="Please enter valid zipcode" v-model="zipcode" required>
       <input type="submit" name="submit" value="submit">
     </form>
-    <table>
-      <tr v-for="house in houses">
+    <table id="table">
+      <tr v-for="house in houses" v-on:click="zillowcall(house)">
         <td>{{house.summary.propclass}}</td>
       </tr>
     </table>
+    <div id="zillow" style="visibility: hidden;">
+      <h1>This will be the zillow element</h1>
+    </div>
   </div>
 </template>
 
@@ -21,7 +24,8 @@ export default {
     return {
       zipcode: '',
       houses: null,
-      price: this.$localStorage.get('price')
+      price: this.$localStorage.get('price'),
+      house: null
     }
   },
   methods: {
@@ -31,8 +35,16 @@ export default {
         'price': this.price
       }
       console.log(data)
-      var res = await NationService.callOnboardApi(data)
+      let res = await NationService.callOnboardApi(data)
       this.houses = res.data.property
+    },
+    zillowcall(house){
+      // let res = await NationService.zillowcall(house.address)
+      var table = document.getElementById('table')
+      table.style.visibility = "hidden"
+      var zillow = document.getElementById('zillow')
+      zillow.style.visibility = "visible"
+      // this.house = res
     }
   }
 }

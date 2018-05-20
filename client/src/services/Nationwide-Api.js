@@ -16,5 +16,8 @@ export default {
   callOnboardApi (data) {
     return Api().post('houseData', data, headers)
     // return [{'id': 'form data is working right now!'}]
+  },
+  callZillowApi(address){
+    return Api().get('', address, headers)
   }
 }
