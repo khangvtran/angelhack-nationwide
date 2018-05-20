@@ -1,4 +1,4 @@
-import axios from 'axios'
+import Api from '@/services/Api'
 
 let headers = {
   'Access-Control-Allow-Origin' : '*',
@@ -8,13 +8,13 @@ let headers = {
 
 export default {
   getNationwide (id) {
-    return axios.create({ baseURL: 'http://localhost:5000/api/' }).get('customerBalances/' + id)
+    return Api().get('customerBalances?id=' + id)
   },
   processData (user) {
-    return axios.create({baseURL: 'http://localhost:5000/api/'}).post('processTotalFunds', user, headers)
+    return Api().post('processTotalFunds', user, headers)
   },
   callOnboardApi (data) {
-    // return axios.create({baseURL: ""}).post('', data)
-    return [{"id": "form data is working right now!"}]
+    return Api().post('houseData', data, headers)
+    // return [{'id': 'form data is working right now!'}]
   }
 }

@@ -1,12 +1,15 @@
 import requests
 from flask import Flask, request, jsonify, render_template
-import json
+from flask_cors import CORS
+
 
 
 mock = "http://nw-angelhack-2018-mocks.us-east-1.elasticbeanstalk.com/"
+onBoard = "https://search.onboard-apis.com/propertyapi/v1.0.0/"
 app = Flask(__name__,
     static_folder = "./../client/dist/static",
     template_folder = "./../client/dist")
+CORS(app)
 
 @app.route("/")
 def hello():
@@ -16,7 +19,7 @@ def hello():
 @app.route("/api/customerBalances", methods = ['GET']) #example url = localhost:port/api/customerBalances?id=
 def getStuff():
     id = int(request.args.get("id"))
-    customers = requests.get(mock+"/customers") #<class 'requests.models.Response'>, use .json() to convert to list
+    customers = requests.get(mock+"/customers") #<class 'requests.models.Response'>, use .json() to convert to list of dict
     monthly_income = int([customer["householdIncome"] for customer in customers.json() if customer["id"] == id][0]/12)
     balance = getBankBalances(id)
     d = {"monthly_salary":monthly_income, "savings":balance}
@@ -32,13 +35,13 @@ def getBankBalances(id):
 # get data from POST
 @app.route("/api/processTotalFunds", methods = ['POST'])
 def getTotalFunds():
-	data = request.get_json() #type(data) = <dict> 
+	json = request.get_json() #type(data) = <dict>
 
-	monthlyIncome = float(data["monthly_salary"])
-	saving = float(data["savings"])
-	percent = int(data["percent"])
-	waitmonths = int(data["wait_months"])
-	mortgageYears = int(data["mortgage_years"])
+	monthlyIncome = float(json["monthly_salary"])
+	saving = float(json["savings"])
+	percent = int(json["percent"])
+	waitmonths = int(json["wait_months"])
+	mortgageYears = int(json["mortgage_years"])
 
 	monthlyPayment = monthlyIncome*percent/100
 	downPayment = monthlyPayment*waitmonths + saving
@@ -46,30 +49,23 @@ def getTotalFunds():
 
 	totalPayment = downPayment + totalMortgagePayment
 	d = {"price":totalPayment}
-	#print(d["price"])
+
 	return jsonify(d), 200
 
+@app.route("/api/houseData", methods = ['POST'])
+def getHouseData():
+    import config
+    rjson = request.get_json()
+    postal = int(rjson["zipcode"])
+    maxVal = float(rjson["price"])
+    headers = {"accept":"application/json", "apiKey" : config.key}
+    payload = {"postalcode":postal, "minavmvalue":int(maxVal*0.95), "maxavmvalue":int(maxVal)}
+    data = requests.get(onBoard+"property/snapshot", params=payload, headers = headers)
+    if data.status_code != 200:
+        return 503
+    return data.text, 200
 
 
-
-
-'''
-
->>> import ast
->>> ast.literal_eval("{'muffin' : 'lolz', 'foo' : 'kitty'}")
-{'muffin': 'lolz', 'foo': 'kitty'}
-
-
-
-{
-	"monthly_salary": "200000",
-	"savings": "1000000",
-	"percent": "30",
-	"wait_months": "12"
-	"mortgage_years": "40"
-	""
-}
-'''
 
 if __name__ == "__main__":
     app.run(host='127.0.0.1', debug=True)

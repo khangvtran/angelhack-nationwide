@@ -7,8 +7,8 @@
       <input type="submit" name="submit" value="submit">
     </form>
     <table>
-      <tr v-for="item in res">
-        <td>{{item.id}}</td>
+      <tr v-for="house in houses">
+        <td>{{house.summary.propclass}}</td>
       </tr>
     </table>
   </div>
@@ -20,7 +20,7 @@ export default {
   data () {
     return {
       zipcode: '',
-      res: null,
+      houses: null,
       price: this.$localStorage.get('price')
     }
   },
@@ -31,7 +31,8 @@ export default {
         'price': this.price
       }
       console.log(data)
-      this.res = NationService.callOnboardApi(data)
+      var res = await NationService.callOnboardApi(data)
+      this.houses = res.data.property
     }
   }
 }
