@@ -13,8 +13,9 @@ def hello():
     return render_template("index.html")
 
 # get data from GET
-@app.route("/api/customerBalances/<int:id>")
-def getStuff(id):
+@app.route("/api/customerBalances", methods = ['GET']) #example url = localhost:port/api/customerBalances?id=
+def getStuff():
+    id = int(request.args.get("id"))
     customers = requests.get(mock+"/customers") #<class 'requests.models.Response'>, use .json() to convert to list
     monthly_income = int([customer["householdIncome"] for customer in customers.json() if customer["id"] == id][0]/12)
     balance = getBankBalances(id)
