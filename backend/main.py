@@ -16,8 +16,8 @@ def getStuff(id):
     customers = requests.get(mock+"/customers") #<class 'requests.models.Response'>, use .json() to convert to list
     monthly_income = int([customer["householdIncome"] for customer in customers.json() if customer["id"] == id][0]/12)
     balance = getBankBalances(id)
-    dict = {"monthly_salary":monthly_income, "savings":balance}
-    return jsonify(dict), 200
+    d = {"monthly_salary":monthly_income, "savings":balance}
+    return jsonify(d), 200
 
 
 def getBankBalances(id):
@@ -42,8 +42,9 @@ def getTotalFunds():
 	totalMortgagePayment = 12*mortgageYears*monthlyPayment
 
 	totalPayment = downPayment + totalMortgagePayment
+	d = {"price":totalPayment}
 
-	return jsonify(totalPayment), 200
+	return jsonify(d), 200
 
 
 
