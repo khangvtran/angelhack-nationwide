@@ -65,8 +65,8 @@ def getHouseData():
     headers = {"accept":"application/json", "apiKey" : config.onboard_key}
     payload = {"postalcode":postal, "minavmvalue":int(maxVal*0), "maxavmvalue":int(maxVal), "pagesize":20}
     data = requests.get(onBoard+"property/snapshot", params=payload, headers = headers)
-    if data.status_code != 200:
-        return 503
+    if data.status_code != 200 and data.status_code != 400:
+        return "", 503
     return data.text, 200
 
 # https://www.zillow.com/howto/api/GetDeepSearchResults.htm
@@ -78,12 +78,7 @@ def callZillowApi():
     resp = requests.get(zillow+"GetDeepSearchResults.htm", params=payload)
     json_data = json.loads(json.dumps(xmlparse.data(fromstring(resp.text))))
     if json_data["message"]["code"] != 0:
-        return 503
-    #also google maps
-    print(json.dumps(json_data["response"]["results"]["result"]))
-    payload = {"location":address["oneLine"], "size":"600x400", "key":config.google_api_key}
-    resp = requests.get("https://maps.googleapis.com/maps/api/streetview", params=payload)
-    print(resp.text)
+        return "", 503
     return json.dumps(json_data["response"]["results"]), 200
 
 
