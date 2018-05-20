@@ -1,6 +1,6 @@
 <template>
   <v-app id="app">
-    <v-toolbar class="site-header" dark color="primary">
+    <v-toolbar dark color="primary">
       <v-toolbar-title>HouseFinder</v-toolbar-title>
     </v-toolbar>
     <v-content>
@@ -16,9 +16,6 @@ export default {
 </script>
 
 <style>
-.site-header {
-  margin-bottom: 60px;
-}
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

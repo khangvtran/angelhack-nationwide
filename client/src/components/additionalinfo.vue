@@ -1,5 +1,5 @@
 <template>
-  <v-layout>
+  <v-layout class="additionalinfo">
     <v-flex xs12 sm8 offset-sm2>
 
       <Panel title="Additional Information">
@@ -47,3 +47,9 @@ export default {
   }
 }
 </script>
+
+<style media="screen">
+  .additionalinfo {
+    margin-top: 60px;
+  }
+</style>

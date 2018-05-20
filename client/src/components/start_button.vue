@@ -1,5 +1,5 @@
 <template>
-  <v-layout>
+  <v-layout class="start-button">
     <v-flex xs12 sm8 offset-sm2>
 
       <Panel title="Non Nationwide Members">
@@ -39,3 +39,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+  .start-button {
+    margin-top: 60px;
+  }
+</style>

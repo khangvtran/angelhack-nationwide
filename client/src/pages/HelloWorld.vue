@@ -1,5 +1,5 @@
 <template>
-  <v-layout>
+  <v-layout class="helloworld">
     <v-flex xs12 sm8 offset-sm2>
 
       <Panel title="Start Planning!">
@@ -52,4 +52,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.helloworld {
+  margin-top: 60px;
+}
 </style>
