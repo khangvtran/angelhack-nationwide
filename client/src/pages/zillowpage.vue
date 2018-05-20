@@ -64,11 +64,11 @@ export default {
       }
       let res = await NationService.callOnboardApi(data)
       this.addMarkers(res)
-      console.log(res.data.property)
     },
     async zillowcall (house) {
       let res = await NationService.callZillowApi(house.address)
-      this.house = res
+      this.house = res.data.result
+      console.log(this.house)
     },
     geolocate: function () {
       navigator.geolocation.getCurrentPosition(position => {
@@ -89,7 +89,6 @@ export default {
         }
         this.houses.push(house)
       }
-      console.log(this.houses)
       this.center = house.position
     }
   }
