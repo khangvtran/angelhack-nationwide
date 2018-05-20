@@ -1,20 +1,27 @@
 <template>
-  <div class="start_button">
-    <h1>Non Nationwide Members</h1>
-    <form @submit="submitHandler">
-      <label for="monthly_salary">Monthly Salary</label>
-      <input type="number" name="monthly_salary" id="monthly_salary" v-model="user.monthly_salary">
-      <br>
-      <label for="savings">Savings set aside for a Home</label>
-      <input type="number" name="savings" id="savings" v-model="user.savings">
-      <br>
-      <input type="submit" value="Submit">
-    </form>
-  </div>
+  <v-layout>
+    <v-flex xs12 sm8 offset-sm2>
+
+      <Panel title="Non Nationwide Members">
+        <v-container>
+          <v-form @submit="submitHandler">
+          <v-text-field label="Monthly Salary:" type="number" name="monthly_salary" id="monthly_salary" v-model="user.monthly_salary"></v-text-field>
+          <v-text-field label="Savings set aside for a Home:" type="number" name="savings" id="savings" v-model="user.savings"></v-text-field>
+          <v-btn type="submit">Submit</v-btn>
+        </v-form>
+        </v-container>
+      </Panel>
+
+    </v-flex>
+  </v-layout>
 </template>
 
 <script scoped>
+import Panel from '@/components/Panel'
 export default {
+  components: {
+    Panel
+  },
   data () {
     return {
       user: {
