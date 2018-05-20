@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
   <form @submit.prevent="submitHandler">
     <label for="percent">Percent of month income you want to set aside for a home</label>
     <input type="number" name="percent" id="percent" v-model="user.percent" required>
@@ -17,17 +18,16 @@ export default {
       user: {
         monthly_salary: JSON.parse(this.$localStorage.get('user')).monthly_salary,
         savings: JSON.parse(this.$localStorage.get('user')).savings,
-        percent: '',
-        wait_months: '',
-        mortgage_years: ''
+        percent: null,
+        wait_months: null,
+        mortgage_years: null
       }
     }
   },
   methods: {
-    submitHandler () {
+    submitHandler (e) {
+      e.preventDefault()
       this.$localStorage.set('user', JSON.stringify(this.user))
-      let object = this.$localStorage.get('user')
-      console.log(object)
     }
   }
 }
