@@ -1,7 +1,9 @@
 import requests
 from flask import Flask, request, jsonify, render_template
 import ast
+
 mock = "http://nw-angelhack-2018-mocks.us-east-1.elasticbeanstalk.com/"
+onBoard = "https://search.onboard-apis.com/propertyapi/v1.0.0/"
 app = Flask(__name__,
     static_folder = "./../client/dist/static",
     template_folder = "./../client/dist")
@@ -47,7 +49,20 @@ def getTotalFunds():
 
 	return jsonify(d), 200
 
-
+@app.route("/api/houseData", methods = ['POST'])
+def getHouseData():
+    import config
+    json = request.get_json()
+    print(json)
+    postal = int(json["zipcode"])
+    maxVal = float(json["price"])
+    print(config.key)
+    headers = {"apiKey" : config.key}
+    payload = {"postalcode":postal, "minavmvalue":int(maxVal*0.95), "maxavmvalue":int(maxVal)}
+    print(payload)
+    data = requests.get(onBoard+"property/snapshot", params=payload, headers = headers)
+    print(data.text)
+    return data.text, 200
 
 
 
