@@ -6,11 +6,18 @@
       <input type="text" name="zipcode" id="zipcode" pattern="[0-9]{5}" maxlength="5" title="Please enter valid zipcode" v-model="zipcode" required>
       <input type="submit" name="submit" value="submit">
     </form>
-    <table id="table">
-      <tr v-for="house in houses" v-on:click="zillowcall(house)">
-        <td>{{house.summary.propclass}}</td>
-      </tr>
-    </table>
+    <GmapMap
+      :center="center"
+      :zoom="18"
+      style="width:100%;  height: 600px;"
+      >
+      <GmapMarker
+          :key="index"
+          v-for="(m, index) in houses"
+          :position="m.position"
+          @click="center=m.position"
+        ></GmapMarker>>
+    </GmapMap>>
     <div id="zillow" style="visibility: hidden;">
       <h1>This will be the zillow element</h1>
     </div>
@@ -23,10 +30,14 @@ export default {
   data () {
     return {
       zipcode: '',
-      houses: null,
+      houses: [],
       price: this.$localStorage.get('price'),
-      house: null
+      house: null,
+      center: { lat: 45.508, lng: -73.587 }
     }
+  },
+  mounted() {
+    this.geolocate();
   },
   methods: {
     async submitHandler () {
@@ -34,9 +45,9 @@ export default {
         'zipcode': this.zipcode,
         'price': this.price
       }
-      console.log(data)
       let res = await NationService.callOnboardApi(data)
-      this.houses = res.data.property
+      this.addMarkers(res)
+      console.log(res.data.property)
     },
     zillowcall(house){
       // let res = await NationService.zillowcall(house.address)
@@ -45,6 +56,27 @@ export default {
       var zillow = document.getElementById('zillow')
       zillow.style.visibility = "visible"
       // this.house = res
+    },
+    geolocate: function() {
+      navigator.geolocation.getCurrentPosition(position => {
+        this.center = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        };
+      });
+    },
+    addMarkers(res){
+      for (var i in res.data.property){
+        var house = { 
+          position: {
+            lat: parseFloat(res.data.property[i].location.latitude),
+            lng: parseFloat(res.data.property[i].location.longitude)
+          }
+        }
+        this.houses.push(house)
+      }
+      console.log(this.houses)
+      this.center = house.position
     }
   }
 }
