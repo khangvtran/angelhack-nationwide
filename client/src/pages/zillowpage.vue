@@ -1,32 +1,49 @@
 <template>
-  <div>
-    <h1>Your estimated house you can afford: {{price}}</h1>
-    <form @submit.prevent="submitHandler">
-      <label for="zipcode">Zip Code</label>
-      <input type="text" name="zipcode" id="zipcode" pattern="[0-9]{5}" maxlength="5" title="Please enter valid zipcode" v-model="zipcode" required>
-      <input type="submit" name="submit" value="submit">
-    </form>
-    <GmapMap
-      :center="center"
-      :zoom="18"
-      style="width:100%;  height: 600px;"
-      >
-      <GmapMarker
-          :key="index"
-          v-for="(m, index) in houses"
-          :position="m.position"
-          @click="zillowcall(m)"
-        ></GmapMarker>
-    </GmapMap>
-    <div id="zillow">
-      <h1>{{house}}</h1>
-    </div>
-  </div>
+  <v-layout class="zillowpage">
+    <v-flex xs4>
+
+      <Panel>
+        <v-container>
+          <v-card-title>
+            <h3>Your estimated house you can afford: {{price}}</h3>
+          </v-card-title>
+          <v-card-actions>
+            <v-form @submit.prevent="submitHandler">
+              <v-text-field label="Zip Code" type="text" name="zipcode" id="zipcode" pattern="[0-9]{5}" maxlength="5" title="Please enter valid zipcode" v-model="zipcode" required></v-text-field>
+              <v-btn type="submit" name="submit">Submit</v-btn>
+            </v-form>
+          </v-card-actions>
+        </v-container>
+      </Panel>
+    </v-flex>
+    <v-flex>
+      <GmapMap
+        :center="center"
+        :zoom="18"
+        style="width:100%;  height: 600px;"
+        >
+        <GmapMarker
+            :key="index"
+            v-for="(m, index) in houses"
+            :position="m.position"
+            @click="zillowcall(m)"
+          ></GmapMarker>
+      </GmapMap>
+      <div id="zillow">
+        <h1>{{house}}</h1>
+      </div>
+
+    </v-flex>
+  </v-layout>
 </template>
 
 <script>
+import Panel from '@/components/Panel'
 import NationService from '@/services/Nationwide-Api'
 export default {
+  components: {
+    Panel
+  },
   data () {
     return {
       zipcode: '',
@@ -78,3 +95,6 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+</style>
