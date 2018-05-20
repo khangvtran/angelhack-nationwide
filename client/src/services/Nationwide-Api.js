@@ -1,13 +1,14 @@
-import axios from 'axios'
+import Api from '@/services/Api'
 
 export default {
   getNationwide (id) {
-    return axios.create({ baseURL: 'http://localhost:5000/api/' }).get('customerBalances/' + id)
+    return Api().get('customerBalances?id=' + id)
   },
   processData (user) {
-    return axios.create({baseURL: 'http://localhost:5000/api/'}).post('processTotalFunds', user)
+    return Api().post('processTotalFunds', user)
   },
   callOnboardApi (data) {
-    return axios.create({baseURL: ''}).post('', data)
+    // return axios.create({baseURL: ""}).post('', data)
+    return [{'id': 'form data is working right now!'}]
   }
 }

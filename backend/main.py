@@ -1,12 +1,15 @@
 import requests
 from flask import Flask, request, jsonify, render_template
-import ast
+from flask_cors import CORS
+
+
 
 mock = "http://nw-angelhack-2018-mocks.us-east-1.elasticbeanstalk.com/"
 onBoard = "https://search.onboard-apis.com/propertyapi/v1.0.0/"
 app = Flask(__name__,
     static_folder = "./../client/dist/static",
     template_folder = "./../client/dist")
+CORS(app)
 
 @app.route("/")
 def hello():
@@ -16,7 +19,7 @@ def hello():
 @app.route("/api/customerBalances", methods = ['GET']) #example url = localhost:port/api/customerBalances?id=
 def getStuff():
     id = int(request.args.get("id"))
-    customers = requests.get(mock+"/customers") #<class 'requests.models.Response'>, use .json() to convert to list
+    customers = requests.get(mock+"/customers") #<class 'requests.models.Response'>, use .json() to convert to list of dict
     monthly_income = int([customer["householdIncome"] for customer in customers.json() if customer["id"] == id][0]/12)
     balance = getBankBalances(id)
     d = {"monthly_salary":monthly_income, "savings":balance}
@@ -32,10 +35,10 @@ def getBankBalances(id):
 # get data from POST
 @app.route("/api/processTotalFunds", methods = ['POST'])
 def getTotalFunds():
-	data = request.data #<string>
-	data = ast.literal_eval(data)  #<dictionary>
+	data = request.get_json() #type(data) = <dict>
+
 	monthlyIncome = float(data["monthly_salary"])
-	saving = float(data["saving"])
+	saving = float(data["savings"])
 	percent = int(data["percent"])
 	waitmonths = int(data["wait_months"])
 	mortgageYears = int(data["mortgage_years"])
@@ -53,15 +56,11 @@ def getTotalFunds():
 def getHouseData():
     import config
     json = request.get_json()
-    print(json)
     postal = int(json["zipcode"])
     maxVal = float(json["price"])
-    print(config.key)
     headers = {"apiKey" : config.key}
     payload = {"postalcode":postal, "minavmvalue":int(maxVal*0.95), "maxavmvalue":int(maxVal)}
-    print(payload)
     data = requests.get(onBoard+"property/snapshot", params=payload, headers = headers)
-    print(data.text)
     return data.text, 200
 
 
