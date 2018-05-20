@@ -6,7 +6,6 @@
         <v-form @submit.prevent="submitHandler">
           <v-text-field label="Zip Code" type="text" name="zipcode" id="zipcode" pattern="[0-9]{5}" maxlength="5" title="Please enter valid zipcode" v-model="zipcode" required></v-text-field>
           <v-btn type="submit" name="submit">Submit</v-btn>
-
           <v-btn
             @click="goBack"
             >Go Back</v-btn>
@@ -24,8 +23,8 @@
               @click="zillowcall(m)"
           ></GmapMarker>
         </GmapMap>
-        <div id="zillow">
-        <h3 v-if="house.zestimate">Price: {{house.zestimate.amount}}</h3>
+        <div id="zillow" v-if="house">
+          <h3 v-if="house.zestimate">Price: {{house.zestimate.amount}}</h3>
           <p v-if="house.bedrooms">Bed rooms: {{house.bedrooms}}</p>
           <p v-if="house.bathrooms">Bath rooms: {{house.bathrooms}}</p>
           <p v-if="house.lotSizeSqFt">Size: {{house.lotSizeSqFt}} Square Feet</p>

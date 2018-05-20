@@ -2,7 +2,7 @@
   <v-layout class="start-button">
     <v-flex xs12 sm8 offset-sm2>
 
-      <Panel title="Non Nationwide Members">
+      <Panel title="Non-Nationwide Members">
         <v-btn
           flat
           absolute
