@@ -19,8 +19,8 @@
             <v-flex>
               <v-btn v-show="!isMember" @click="isMember = !isMember">Yes</v-btn>
               <div v-show="isMember">
-                <v-form @submit="getData">
-                  <v-text-field label="Enter your Nationwide ID:" v-model="form.id" type="text"></v-text-field>
+                <v-form v-model="valid" ref="form" lazy-validation @submit="getData">
+                  <v-text-field label="Enter your Nationwide ID:" v-model="form.id" :rules="[rules.required]" required></v-text-field>
                   <v-btn type="submit">Submit</v-btn>
                   <v-btn @click="isMember = !isMember" type="button">Cancel</v-btn>
                 </v-form>
@@ -45,6 +45,7 @@ export default {
   },
   data () {
     return {
+      valid: true,
       form: {
         id: null
       },
@@ -52,17 +53,22 @@ export default {
         monthly_salary: null,
         savings: null
       },
-      isMember: false
+      isMember: false,
+      rules: {
+        required: v => !!v || 'Required.'
+      }
     }
   },
   methods: {
     async getData (e) {
       e.preventDefault()
-      const response = await NationService.getNationwide(this.form.id)
-      this.user.monthly_salary = response.data.monthly_salary
-      this.user.savings = response.data.savings
-      this.$localStorage.set('user', JSON.stringify(this.user))
-      this.$router.push({ name: 'additionalinfo' })
+      if (this.$refs.form.validate()) {
+        const response = await NationService.getNationwide(this.form.id)
+        this.user.monthly_salary = response.data.monthly_salary
+        this.user.savings = response.data.savings
+        this.$localStorage.set('user', JSON.stringify(this.user))
+        this.$router.push({ name: 'additionalinfo' })
+      }
     }
   }
 }
