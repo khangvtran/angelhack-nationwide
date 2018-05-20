@@ -11,6 +11,7 @@
 </template>
 
 <script scoped>
+import NationService from '@/services/Nationwide-Api'
 export default {
   data () {
     return {
@@ -24,9 +25,13 @@ export default {
     }
   },
   methods: {
-    submitHandler (e) {
+    async submitHandler (e) {
       e.preventDefault()
       this.$localStorage.set('user', JSON.stringify(this.user))
+      const res = await NationService.processData(this.user)
+      this.$localStorage.set('price', JSON.stringify(res.data.price))
+      console.log(res.data.price)
+      this.$router.push({ name: 'zillowpage' })
     }
   }
 }

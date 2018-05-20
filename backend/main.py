@@ -1,11 +1,15 @@
 import requests
+import json
 from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
-
+from xmljson import parker as xmlparse, Parker
+from xml.etree.ElementTree import fromstring
+import config
 
 
 mock = "http://nw-angelhack-2018-mocks.us-east-1.elasticbeanstalk.com/"
 onBoard = "https://search.onboard-apis.com/propertyapi/v1.0.0/"
+zillow = "http://www.zillow.com/webservice/"
 app = Flask(__name__,
     static_folder = "./../client/dist/static",
     template_folder = "./../client/dist")
@@ -54,15 +58,26 @@ def getTotalFunds():
 
 @app.route("/api/houseData", methods = ['POST'])
 def getHouseData():
-    import config
-    json = request.get_json()
-    postal = int(json["zipcode"])
-    maxVal = float(json["price"])
-    headers = {"apiKey" : config.key}
+    rjson = request.get_json()
+    postal = int(rjson["zipcode"])
+    maxVal = float(rjson["price"])
+    headers = {"accept":"application/json", "apiKey" : config.onboard_key}
     payload = {"postalcode":postal, "minavmvalue":int(maxVal*0.95), "maxavmvalue":int(maxVal)}
-    data = requests.get(onBoard+"property/snapshot", params=payload, headers = headers) # create an URL string
+    data = requests.get(onBoard+"property/snapshot", params=payload, headers = headers)
+    if data.status_code != 200:
+        return 503
     return data.text, 200
 
+# https://www.zillow.com/howto/api/GetDeepSearchResults.htm
+@app.route("/api/callZillowApi", methods = ['POST'])
+def callZillowApi():
+    address = request.get_json()
+    payload = {"zws-id":config.zillow_key, "address":address["line1"], "citystatezip":address["locality"]+","+address["countrySubd"]}
+    resp = requests.get(zillow+"GetDeepSearchResults.htm", params=payload)
+    json_data = json.loads(json.dumps(xmlparse.data(fromstring(resp.text))))
+    if json_data["message"]["code"] != 0:
+        return 503
+    return json.dumps(json_data["response"]["results"]), 200
 
 
 if __name__ == "__main__":
