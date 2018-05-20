@@ -2,7 +2,7 @@
   <v-layout class="zillowpage">
     <v-flex xs12>
       <v-container>
-        <h3>Your estimated house you can afford: {{price}}</h3>
+        <h3>Your estimated house you can afford: ${{price}}</h3>
         <v-form @submit.prevent="submitHandler">
           <v-text-field label="Zip Code" type="text" name="zipcode" id="zipcode" pattern="[0-9]{5}" maxlength="5" title="Please enter valid zipcode" v-model="zipcode" required></v-text-field>
           <v-btn type="submit" name="submit">Submit</v-btn>
@@ -31,7 +31,7 @@
           </v-card-title>
           <v-layout row>
             <v-flex xs6>
-              <h3 v-if="house.zestimate">Price: {{house.zestimate.amount}}</h3>
+              <h3 v-if="house.zestimate">Price: ${{house.zestimate.amount}}</h3>
               <span v-if="house.bedrooms">Bed rooms: {{house.bedrooms}}</span><br>
               <span v-if="house.bathrooms">Bath rooms: {{house.bathrooms}}</span><br>
               <span v-if="house.lotSizeSqFt">Size: {{house.lotSizeSqFt}} Square Feet</span><br>
@@ -72,7 +72,7 @@ export default {
       houses: [],
       price: this.$localStorage.get('price'),
       house: null,
-      center: { lat: 45.508, lng: -73.587 },
+      center: { lat: 37.383, lng: -122.012 },
       user: JSON.parse(this.$localStorage.get('user'))
     }
   },
