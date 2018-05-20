@@ -1,9 +1,9 @@
 <template>
   <form @submit.prevent="submitHandler">
     <label for="monthly_salary">Monthly Salary</label>
-    <input type="number" name="monthly_salary" id="monthly_salary" v-model="user.monthly_salary">
+    <input type="number" name="monthly_salary" id="monthly_salary" v-model="user.monthly_salary"  required>
     <label for="savings">Savings set aside for a Home</label>
-    <input type="number" name="savings" id="savings" v-model="user.savings">
+    <input type="number" name="savings" id="savings" v-model="user.savings" required>
     <input type="submit" value="Submit">
   </form>
 </template>
