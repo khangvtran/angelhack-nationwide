@@ -35,7 +35,7 @@ def getTotalFunds():
 	saving = float(data["saving"])
 	percent = int(data["percent"])
 	waitmonths = int(data["wait_months"])
-	int mortgageYears = int(data["mortgage_years"])
+	mortgageYears = int(data["mortgage_years"])
 
 	monthlyPayment = monthlyIncome*percent/100
 	downPayment = monthlyPayment*waitmonths + saving
