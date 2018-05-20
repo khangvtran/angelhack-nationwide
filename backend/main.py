@@ -1,7 +1,7 @@
 import requests
 from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
-import json
+
 
 
 mock = "http://nw-angelhack-2018-mocks.us-east-1.elasticbeanstalk.com/"
