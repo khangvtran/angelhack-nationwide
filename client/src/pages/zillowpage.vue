@@ -19,9 +19,12 @@
         ></GmapMarker>
     </GmapMap>
     <div id="zillow" v-if="house">
-      <h1>{{house}}</h1>
-      <p v-if="house.totalRooms">Total rooms: {{house.totalRooms}}</p>
-      <p></p>
+      <!-- <h1>{{house}}</h1> -->
+      <h3 v-if="house.zestimate">Price: {{house.zestimate.amount}}</h3>
+      <p v-if="house.totalRooms">Rooms: {{house.totalRooms}}</p>
+      <p v-if="house.lotSizeSqFt">Size: {{house.lotSizeSqFt}} Square Feet</p>
+      <p v-if="house.address">{{house.address.street}} {{house.address.city}} {{house.address.state}} {{house.address.zipcode}}</p>
+      
     </div>
   </div>
 </template>
@@ -49,11 +52,11 @@ export default {
       }
       let res = await NationService.callOnboardApi(data)
       this.addMarkers(res)
-      console.log(res.data.property)
     },
     async zillowcall (house) {
       let res = await NationService.callZillowApi(house.address)
       this.house = res.data.result
+      console.log(this.house)
     },
     geolocate: function () {
       navigator.geolocation.getCurrentPosition(position => {
@@ -74,7 +77,6 @@ export default {
         }
         this.houses.push(house)
       }
-      console.log(this.houses)
       this.center = house.position
     }
   }
