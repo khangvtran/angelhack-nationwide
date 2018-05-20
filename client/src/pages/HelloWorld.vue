@@ -4,12 +4,29 @@
 
       <Panel title="Start Planning!">
         <v-container>
+          <h2>Do you find the idea of buying a house initimidating?</h2>
+          <p>
+            It's a big life decision and we know it can be anxious! That's why we're here to make your experience be as smooth and informative.
+            <br>
+            So let's get Started!
+          </p>
+          <v-card-title>
+            <div>
+              <h3>Q. Are you a Nationwide Member?</h3>
+            </div>
+          </v-card-title>
           <v-card-actions>
-            <v-btn :to="{ name: 'start_button' }" name="button">Non Nationwide Members</v-btn>
-            <v-form @submit="getData">
-              <v-text-field label="Enter your Nationwide ID:" v-model="form.id" type="text"></v-text-field>
-              <v-btn type="submit" name="button">Nationwide</v-btn>
-            </v-form>
+            <v-flex>
+              <v-btn v-show="!isMember" @click="isMember = !isMember">Yes</v-btn>
+              <div v-show="isMember">
+                <v-form @submit="getData">
+                  <v-text-field label="Enter your Nationwide ID:" v-model="form.id" type="text"></v-text-field>
+                  <v-btn type="submit">Submit</v-btn>
+                  <v-btn @click="isMember = !isMember" type="button">Cancel</v-btn>
+                </v-form>
+              </div>
+              <v-btn v-show="!isMember" :to="{ name: 'start_button' }">No</v-btn>
+            </v-flex>
           </v-card-actions>
         </v-container>
       </Panel>
@@ -34,7 +51,8 @@ export default {
       user: {
         monthly_salary: null,
         savings: null
-      }
+      },
+      isMember: false
     }
   },
   methods: {
