@@ -2,7 +2,7 @@
   <form @submit.prevent="submitHandler">
     <label for="percent">Percent of month income you want to set aside for a home</label>
     <input type="number" name="percent" id="percent" v-model="user.percent" required>
-    <label for="wait_months">How long do you want to wait until you buy a home?</label>
+    <label for="wait_months">How long do you want to wait until you buy a home? (Months)</label>
     <input type="number" name="waitmonths" id="waitmonths" v-model="user.wait_months" required>
     <label for="mortgage_years">How long do you want your mortgage to be? (Years)</label>
     <input type="number" name="mortgage_years" id="mortgage_years" v-model="user.mortgage_years" required>
