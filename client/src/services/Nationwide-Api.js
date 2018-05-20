@@ -8,7 +8,7 @@ export default {
     return Api().post('processTotalFunds', user)
   },
   callOnboardApi (data) {
-    // return Api().post('', data)
-    return [{'id': 1234}]
+    // return axios.create({baseURL: ""}).post('', data)
+    return [{'id': 'form data is working right now!'}]
   }
 }
