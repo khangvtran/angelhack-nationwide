@@ -1,6 +1,5 @@
 import requests
 from flask import Flask, request, jsonify, render_template
-import ast
 import json
 
 
