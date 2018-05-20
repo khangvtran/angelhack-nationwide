@@ -62,7 +62,7 @@ def getHouseData():
     postal = int(rjson["zipcode"])
     maxVal = float(rjson["price"])
     headers = {"accept":"application/json", "apiKey" : config.onboard_key}
-    payload = {"postalcode":postal, "minavmvalue":int(maxVal*0.95), "maxavmvalue":int(maxVal)}
+    payload = {"postalcode":postal, "minavmvalue":int(maxVal*0), "maxavmvalue":int(maxVal)}
     data = requests.get(onBoard+"property/snapshot", params=payload, headers = headers)
     if data.status_code != 200:
         return 503
