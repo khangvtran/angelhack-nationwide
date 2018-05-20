@@ -20,7 +20,12 @@
               <v-btn v-show="!isMember" @click="isMember = !isMember">Yes</v-btn>
               <div v-show="isMember">
                 <v-form v-model="valid" ref="form" lazy-validation @submit="getData">
-                  <v-text-field label="Enter your Nationwide ID:" v-model="form.id" :rules="[rules.required]" required></v-text-field>
+                  <v-text-field
+                    label="Enter your Nationwide ID:"
+                    v-model="form.id"
+                    :rules="[rules.required]"
+                    required>
+                  </v-text-field>
                   <v-btn type="submit">Submit</v-btn>
                   <v-btn @click="isMember = !isMember" type="button">Cancel</v-btn>
                 </v-form>

@@ -73,7 +73,7 @@ export default {
       price: this.$localStorage.get('price'),
       house: null,
       center: { lat: 45.508, lng: -73.587 },
-      user: JSON.parse(this.$localStorage.get("user")),
+      user: JSON.parse(this.$localStorage.get('user'))
     }
   },
   mounted () {
@@ -92,10 +92,9 @@ export default {
       let res = await NationService.callZillowApi(house.address)
       this.house = res.data.result
       if (this.house.zestimate.amount > +this.price) {
-        this.mortgage = Math.ceil (this.user.monthly_salary * (this.user.percent/ 100))
+        this.mortgage = Math.ceil(this.user.monthly_salary * (this.user.percent / 100))
         this.house.wait_months = this.calcuateMortgage(this.house)
-      }
-      else {
+      } else {
         this.calcuateLowMortgage(this.house)
       }
     },
@@ -125,23 +124,23 @@ export default {
     },
     calcuateMortgage (house) {
       let total = house.zestimate.amount
-      let user = JSON.parse(this.$localStorage.get("user"))
+      let user = JSON.parse(this.$localStorage.get('user'))
       let mortgage = parseInt(user.mortgage_years) * 12 * parseInt(user.monthly_salary) * (parseInt(user.percent) / 100)
       let result = total - parseInt(user.savings) - mortgage
       let results = result / (+user.monthly_salary * (+user.percent / 100))
       return Math.ceil(results)
     },
-    calcuateLowMortgage(house) {
+    calcuateLowMortgage (house) {
       let total = house.zestimate.amount
       this.house.downpayment = {
         five: total * 0.05,
-        ten:  total * 0.1,
+        ten: total * 0.1,
         twenty: total * 0.20
       }
       this.house.mortgage = {
-        five: (total - this.house.downpayment.five)/ (this.user.mortgage_years * 12),
-        ten: (total - this.house.downpayment.ten)/ (this.user.mortgage_years * 12),
-        twenty: (total - this.house.downpayment.twenty)/ (this.user.mortgage_years * 12)
+        five: (total - this.house.downpayment.five) / (this.user.mortgage_years * 12),
+        ten: (total - this.house.downpayment.ten) / (this.user.mortgage_years * 12),
+        twenty: (total - this.house.downpayment.twenty) / (this.user.mortgage_years * 12)
       }
       console.log(this.house.mortgage, this.house.downpayment)
     }
