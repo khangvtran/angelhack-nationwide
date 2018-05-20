@@ -1,7 +1,6 @@
 <template>
   <v-layout class="additionalinfo">
     <v-flex xs12 sm8 offset-sm2>
-
       <Panel title="Additional Information">
         <v-btn
           flat
@@ -78,7 +77,6 @@ export default {
         this.$localStorage.set('user', JSON.stringify(this.user))
         const res = await NationService.processData(this.user)
         this.$localStorage.set('price', JSON.stringify(res.data.price))
-        console.log(res.data.price)
         this.$router.push({ name: 'zillowpage' })
       }
     },
