@@ -63,6 +63,11 @@ Iono
 
 + Access to metadata on available housing such as list price, number of bedrooms, and number of bathrooms.
 
+## Hosting
+
++ Hosted on [AWS Elastic Beanstalk](https://aws.amazon.com/elasticbeanstalk/) for deployment of the web application.
+
+
 ## What We Learned
 
 + Develop a web application that answers a specific business problem addressed by Nationwide's needs
