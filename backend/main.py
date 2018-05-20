@@ -1,6 +1,9 @@
 import requests
 from flask import Flask, request, jsonify, render_template
 import ast
+import json
+
+
 mock = "http://nw-angelhack-2018-mocks.us-east-1.elasticbeanstalk.com/"
 app = Flask(__name__,
     static_folder = "./../client/dist/static",
@@ -26,13 +29,13 @@ def getBankBalances(id):
     return balance
 
 
-# get data from POST 
+# get data from POST
 @app.route("/api/processTotalFunds", methods = ['POST'])
 def getTotalFunds():
-	data = request.data #<string>
-	data = ast.literal_eval(data)  #<dictionary>
+	data = request.get_json() #type(data) = <dict> 
+
 	monthlyIncome = float(data["monthly_salary"])
-	saving = float(data["saving"])
+	saving = float(data["savings"])
 	percent = int(data["percent"])
 	waitmonths = int(data["wait_months"])
 	mortgageYears = int(data["mortgage_years"])
@@ -43,7 +46,7 @@ def getTotalFunds():
 
 	totalPayment = downPayment + totalMortgagePayment
 	d = {"price":totalPayment}
-
+	#print(d["price"])
 	return jsonify(d), 200
 
 
