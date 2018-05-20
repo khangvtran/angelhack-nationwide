@@ -1,33 +1,37 @@
 <template>
   <div>
+    <h1>Your estimated house you can afford: {{price}}</h1>
     <form @submit.prevent="submitHandler">
       <label for="zipcode">Zip Code</label>
-      <input type="text" name="zipcode" id="zipcode" v-model="zipcode.number">
+      <input type="number" name="zipcode" id="zipcode" v-model="zipcode" required>
       <input type="submit" name="submit" value="submit">
     </form>
-    <table>{{res}}</table>
+    <table>
+      <tr v-for="item in res">
+        <td></td>
+      </tr>
+    </table>
   </div>
 </template>
 
 <script>
 import NationService from '@/services/Nationwide-Api'
 export default {
-  data () {
+  data() {
     return {
-      zipcode: {
-        number: ''
-      },
-      res: null
+      zipcode: '',
+      res: null,
+      price: this.$localStorage.get('price')
     }
   },
   methods: {
     async submitHandler () {
       var data = {
-        'zipcode': this.zipcode.number,
-        'monthly_salary': this.$localStorage.get('monthly_salary'),
-        'savings': this.$localStorage.get('savings')
+        'zipcode': this.zipcode,
+        'price': this.price
       }
-      this.res = await NationService.postToZipcode(data)
+      console.log(data)
+      this.res = NationService.callOnboardApi(data)
     }
   }
 }
