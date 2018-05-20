@@ -26,7 +26,7 @@ In the *backend* directory.
 
 ## API's used:
 
-We used [Vue.js](https://vuejs.org/) for implementing a front-end web application, which (George/Lorman add why we used this)
++ We used [Vue.js](https://vuejs.org/) for implementing a front-end web application, which (George/Lorman add why we used this)
 
 ## How does it work?
 
@@ -36,9 +36,19 @@ Iono
 
 # Back end
 
-We used [Flask](http://flask.pocoo.org/) for our server and allowed us to 
++ [Flask](http://flask.pocoo.org/), a microframework that acts as our server to deploy the web application. Flask implements bare minimum requirements with simplicity, flexibility, and fine-grained control. 
+
++ [Flask CORS](http://flask-cors.readthedocs.io/en/latest/), which is a way to meet security settings to connect your back-end to your front-end.
+
++ [requests](http://docs.python-requests.org/en/master/) allows us to do HTTP requests to serve our backend to Flask.
+
++ [xmljson](https://pypi.org/project/xmljson/) parses XML files into JSON objects to parse response text from the Zillow API
 
 ## API's used:
+
++ [Zillow API](https://www.zillow.com/howto/api/APIOverview.htm)
+
++ [Nationwide API](https://app.swaggerhub.com/apis/NationwideInsurance/Hackathon-May-2018/1.0.0)
 
 ## How does it work?
 
