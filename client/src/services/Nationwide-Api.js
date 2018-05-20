@@ -9,6 +9,6 @@ export default {
   },
   callOnboardApi(data){
     // return axios.create({baseURL: ""}).post('', data)
-    return [{"id": 1234}]
+    return [{"id": "form data is working right now!"}]
   }
 }
