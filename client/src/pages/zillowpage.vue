@@ -107,6 +107,7 @@ export default {
       })
     },
     addMarkers (res) {
+      console.log(res.data.property)
       for (var i in res.data.property) {
         var house = {
           position: {
