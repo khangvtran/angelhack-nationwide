@@ -17,7 +17,7 @@
 <script>
 import NationService from '@/services/Nationwide-Api'
 export default {
-  data() {
+  data () {
     return {
       zipcode: '',
       res: null,
