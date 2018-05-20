@@ -35,13 +35,13 @@ def getBankBalances(id):
 # get data from POST
 @app.route("/api/processTotalFunds", methods = ['POST'])
 def getTotalFunds():
-	data = request.get_json() #type(data) = <dict>
+	json = request.get_json() #type(data) = <dict>
 
-	monthlyIncome = float(data["monthly_salary"])
-	saving = float(data["savings"])
-	percent = int(data["percent"])
-	waitmonths = int(data["wait_months"])
-	mortgageYears = int(data["mortgage_years"])
+	monthlyIncome = float(json["monthly_salary"])
+	saving = float(json["savings"])
+	percent = int(json["percent"])
+	waitmonths = int(json["wait_months"])
+	mortgageYears = int(json["mortgage_years"])
 
 	monthlyPayment = monthlyIncome*percent/100
 	downPayment = monthlyPayment*waitmonths + saving
@@ -64,24 +64,6 @@ def getHouseData():
     return data.text, 200
 
 
-
-'''
-
->>> import ast
->>> ast.literal_eval("{'muffin' : 'lolz', 'foo' : 'kitty'}")
-{'muffin': 'lolz', 'foo': 'kitty'}
-
-
-
-{
-	"monthly_salary": "200000",
-	"savings": "1000000",
-	"percent": "30",
-	"wait_months": "12"
-	"mortgage_years": "40"
-	""
-}
-'''
 
 if __name__ == "__main__":
     app.run(host='127.0.0.1', debug=True)
