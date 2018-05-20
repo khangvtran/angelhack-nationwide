@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-      <router-link :to="{ name: 'additionalinfo' }" type="button" name="button"><button type="button" name="button">Non Nationwide Members</button></router-link>
+      <router-link :to="{ name: 'start_button' }" type="button" name="button"><button type="button" name="button">Non Nationwide Members</button></router-link>
     <form @submit="getData">
       <input v-model="form.id" type="text">
       <button type="submit" name="button">Nationwide</button>
@@ -15,13 +15,11 @@ export default {
   data () {
     return {
       form: {
-        id: ''
+        id: null
       },
       user: {
-        monthly_salary: '',
-        savings: '',
-        percent: '',
-        waitmonths: ''
+        monthly_salary: null,
+        savings: null
       }
     }
   },
@@ -31,9 +29,8 @@ export default {
       const response = await NationService.getNationwide(this.form.id)
       this.user.monthly_salary = response.data.monthly_salary
       this.user.savings = response.data.savings
-      this.user.percent = response.data.percent
-      this.user.waitmonths = response.data.waitmonths
       this.$localStorage.set('user', JSON.stringify(this.user))
+      this.$router.push({ name: 'additionalinfo' })
     }
   }
 }
