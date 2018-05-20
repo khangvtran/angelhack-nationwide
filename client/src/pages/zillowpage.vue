@@ -21,10 +21,12 @@
     <div id="zillow" v-if="house">
       <!-- <h1>{{house}}</h1> -->
       <h3 v-if="house.zestimate">Price: {{house.zestimate.amount}}</h3>
-      <p v-if="house.totalRooms">Rooms: {{house.totalRooms}}</p>
+      <!-- <p v-if="house.totalRooms">Rooms: {{house.totalRooms}}</p> -->
+      <p v-if="house.bedrooms">Bed rooms: {{house.bedrooms}}</p>
+      <p v-if="house.bathrooms">Bath rooms: {{house.bathrooms}}</p>
       <p v-if="house.lotSizeSqFt">Size: {{house.lotSizeSqFt}} Square Feet</p>
       <p v-if="house.address">{{house.address.street}} {{house.address.city}} {{house.address.state}} {{house.address.zipcode}}</p>
-      
+
     </div>
   </div>
 </template>
