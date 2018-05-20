@@ -60,7 +60,7 @@ def getHouseData():
     maxVal = float(json["price"])
     headers = {"apiKey" : config.key}
     payload = {"postalcode":postal, "minavmvalue":int(maxVal*0.95), "maxavmvalue":int(maxVal)}
-    data = requests.get(onBoard+"property/snapshot", params=payload, headers = headers)
+    data = requests.get(onBoard+"property/snapshot", params=payload, headers = headers) # create an URL string
     return data.text, 200
 
 
