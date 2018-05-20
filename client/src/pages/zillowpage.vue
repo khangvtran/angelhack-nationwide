@@ -32,10 +32,10 @@
           <v-layout row>
             <v-flex xs6>
               <h3 v-if="house.zestimate">Price: {{house.zestimate.amount}}</h3>
-              <p v-if="house.bedrooms">Bed rooms: {{house.bedrooms}}</p>
-              <p v-if="house.bathrooms">Bath rooms: {{house.bathrooms}}</p>
-              <p v-if="house.lotSizeSqFt">Size: {{house.lotSizeSqFt}} Square Feet</p>
-              <p v-if="house.address">{{house.address.street}} {{house.address.city}} {{house.address.state}} {{house.address.zipcode}}</p>
+              <span v-if="house.bedrooms">Bed rooms: {{house.bedrooms}}</span><br>
+              <span v-if="house.bathrooms">Bath rooms: {{house.bathrooms}}</span><br>
+              <span v-if="house.lotSizeSqFt">Size: {{house.lotSizeSqFt}} Square Feet</span><br>
+              <span v-if="house.address">{{house.address.street}} {{house.address.city}} {{house.address.state}} {{house.address.zipcode}}</span>
             </v-flex>
             <v-flex xs6>
               <p v-if="house.wait_months">Will need to wait {{house.wait_months}} month(s) in order to buy this house</p>
