@@ -36,6 +36,7 @@ def getBankBalances(id):
     return balance
 
 
+
 # get data from POST
 @app.route("/api/processTotalFunds", methods = ['POST'])
 def getTotalFunds():
@@ -62,7 +63,7 @@ def getHouseData():
     postal = int(rjson["zipcode"])
     maxVal = float(rjson["price"])
     headers = {"accept":"application/json", "apiKey" : config.onboard_key}
-    payload = {"postalcode":postal, "minavmvalue":int(maxVal*0), "maxavmvalue":int(maxVal)}
+    payload = {"postalcode":postal, "minavmvalue":int(maxVal*0), "maxavmvalue":int(maxVal), "pagesize":20}
     data = requests.get(onBoard+"property/snapshot", params=payload, headers = headers)
     if data.status_code != 200:
         return 503
@@ -72,11 +73,17 @@ def getHouseData():
 @app.route("/api/callZillowApi", methods = ['POST'])
 def callZillowApi():
     address = request.get_json()
+    #zillow call
     payload = {"zws-id":config.zillow_key, "address":address["line1"], "citystatezip":address["locality"]+","+address["countrySubd"]}
     resp = requests.get(zillow+"GetDeepSearchResults.htm", params=payload)
     json_data = json.loads(json.dumps(xmlparse.data(fromstring(resp.text))))
     if json_data["message"]["code"] != 0:
         return 503
+    #also google maps
+    print(json.dumps(json_data["response"]["results"]["result"]))
+    payload = {"location":address["oneLine"], "size":"600x400", "key":config.google_api_key}
+    resp = requests.get("https://maps.googleapis.com/maps/api/streetview", params=payload)
+    print(resp.text)
     return json.dumps(json_data["response"]["results"]), 200
 
 
