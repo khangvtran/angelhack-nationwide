@@ -1,5 +1,6 @@
 import requests
 from flask import Flask, request, jsonify, render_template
+from flask_cors import CORS
 import json
 
 
@@ -7,6 +8,7 @@ mock = "http://nw-angelhack-2018-mocks.us-east-1.elasticbeanstalk.com/"
 app = Flask(__name__,
     static_folder = "./../client/dist/static",
     template_folder = "./../client/dist")
+CORS(app)
 
 @app.route("/")
 def hello():
@@ -16,7 +18,7 @@ def hello():
 @app.route("/api/customerBalances", methods = ['GET']) #example url = localhost:port/api/customerBalances?id=
 def getStuff():
     id = int(request.args.get("id"))
-    customers = requests.get(mock+"/customers") #<class 'requests.models.Response'>, use .json() to convert to list
+    customers = requests.get(mock+"/customers") #<class 'requests.models.Response'>, use .json() to convert to list of dict
     monthly_income = int([customer["householdIncome"] for customer in customers.json() if customer["id"] == id][0]/12)
     balance = getBankBalances(id)
     d = {"monthly_salary":monthly_income, "savings":balance}
@@ -46,7 +48,7 @@ def getTotalFunds():
 
 	totalPayment = downPayment + totalMortgagePayment
 	d = {"price":totalPayment}
-	#print(d["price"])
+
 	return jsonify(d), 200
 
 
