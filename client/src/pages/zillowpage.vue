@@ -31,6 +31,7 @@ export default {
         'price': this.price
       }
       console.log(data)
+      this.res = NationService.callOnboardApi(data)
     }
   }
 }
