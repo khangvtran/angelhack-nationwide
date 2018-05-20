@@ -10,15 +10,33 @@ NaviGarden is a web application that assists millenial home buyers in navigating
 
 # Front end
 
+To install dependencies for Vue.js, write
+
+`npm install`
+
+from inside the *client* directory, and in the same directory, write
+
+`npm run build`
+
+in the terminal. This will allow the web application to be available for viewing in our server in `main.py`, which can be accessed via
+
+`python main.py`
+
+In the *backend* directory.
+
 ## API's used:
 
+We used [Vue.js](https://vuejs.org/) for implementing a front-end web application, which (George/Lorman add why we used this)
+
 ## How does it work?
+
+Iono
 
 ## Features
 
 # Back end
 
-We used [Flask](http://flask.pocoo.org/)
+We used [Flask](http://flask.pocoo.org/) for our server and allowed us to 
 
 ## API's used:
 
