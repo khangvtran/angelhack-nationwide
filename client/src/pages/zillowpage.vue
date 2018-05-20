@@ -39,6 +39,14 @@
             </v-flex>
             <v-flex xs6>
               <p v-if="house.wait_months">Will need to wait {{house.wait_months}} month(s) in order to buy this house</p>
+              <div v-if="house.downpayment">
+                  <p>With a down payment of ${{Math.ceil(house.downpayment.five)}} (5%)<br>
+                  Mortgage will be ${{Math.ceil(house.mortgage.five)}} per month for {{user.mortgage_years}} years</p>
+                  <p>With a down payment of ${{Math.ceil(house.downpayment.ten)}} (10%)<br>
+                  Mortgage will be ${{Math.ceil(house.mortgage.ten)}} per month for {{user.mortgage_years}} years</p>
+                  <p>With a down payment of ${{Math.ceil(house.downpayment.twenty)}} (20%)<br>
+                  Mortgage will be ${{Math.ceil(house.mortgage.twenty)}} per month for {{user.mortgage_years}} years</p>
+              </div>
             </v-flex>
           </v-layout>
           <v-card-actions>
@@ -64,7 +72,8 @@ export default {
       houses: [],
       price: this.$localStorage.get('price'),
       house: null,
-      center: { lat: 45.508, lng: -73.587 }
+      center: { lat: 45.508, lng: -73.587 },
+      user: JSON.parse(this.$localStorage.get("user")),
     }
   },
   mounted () {
@@ -82,7 +91,13 @@ export default {
     async zillowcall (house) {
       let res = await NationService.callZillowApi(house.address)
       this.house = res.data.result
-      this.house.wait_months = this.calcuateMortgage(this.house)
+      if (this.house.zestimate.amount > +this.price) {
+        this.mortgage = Math.ceil (this.user.monthly_salary * (this.user.percent/ 100))
+        this.house.wait_months = this.calcuateMortgage(this.house)
+      }
+      else {
+        this.calcuateLowMortgage(this.house)
+      }
     },
     geolocate: function () {
       navigator.geolocation.getCurrentPosition(position => {
@@ -110,14 +125,25 @@ export default {
     },
     calcuateMortgage(house){
       let total = house.zestimate.amount
-      console.log(total)
       let user = JSON.parse(this.$localStorage.get("user"))
       let mortgage = parseInt(user.mortgage_years) * 12 * parseInt(user.monthly_salary) * (parseInt(user.percent) / 100)
-      console.log(mortgage)
       let result = total - parseInt(user.savings) - mortgage
-      console.log(result)
       let results = result / (+user.monthly_salary * (+user.percent / 100))
       return Math.ceil(results)
+    },
+    calcuateLowMortgage(house) {
+      let total = house.zestimate.amount
+      this.house.downpayment = {
+        five: total * 0.05,
+        ten:  total * 0.1,
+        twenty: total * 0.20
+      }
+      this.house.mortgage = {
+        five: (total - this.house.downpayment.five)/ (this.user.mortgage_years * 12),
+        ten: (total - this.house.downpayment.ten)/ (this.user.mortgage_years * 12),
+        twenty: (total - this.house.downpayment.twenty)/ (this.user.mortgage_years * 12)
+      }
+      console.log(this.house.mortgage, this.house.downpayment)
     }
   }
 }
