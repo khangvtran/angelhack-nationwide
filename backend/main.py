@@ -55,12 +55,14 @@ def getTotalFunds():
 @app.route("/api/houseData", methods = ['POST'])
 def getHouseData():
     import config
-    json = request.get_json()
-    postal = int(json["zipcode"])
-    maxVal = float(json["price"])
-    headers = {"apiKey" : config.key}
+    rjson = request.get_json()
+    postal = int(rjson["zipcode"])
+    maxVal = float(rjson["price"])
+    headers = {"accept":"application/json", "apiKey" : config.key}
     payload = {"postalcode":postal, "minavmvalue":int(maxVal*0.95), "maxavmvalue":int(maxVal)}
     data = requests.get(onBoard+"property/snapshot", params=payload, headers = headers)
+    if data.status_code != 200:
+        return 503
     return data.text, 200
 
 
