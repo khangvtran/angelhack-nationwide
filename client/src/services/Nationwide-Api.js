@@ -1,8 +1,8 @@
 import Api from '@/services/Api'
 
 let headers = {
-  'Access-Control-Allow-Origin' : '*',
-  'Access-Control-Allow-Methods' : 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
   'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token'
 }
 
@@ -17,7 +17,7 @@ export default {
     return Api().post('houseData', data, headers)
     // return [{'id': 'form data is working right now!'}]
   },
-  callZillowApi(address){
+  callZillowApi (address) {
     return Api().post('callZillowApi', address, headers)
   }
 }

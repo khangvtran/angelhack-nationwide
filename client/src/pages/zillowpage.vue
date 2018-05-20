@@ -38,8 +38,8 @@ export default {
       center: { lat: 45.508, lng: -73.587 }
     }
   },
-  mounted() {
-    this.geolocate();
+  mounted () {
+    this.geolocate()
   },
   methods: {
     async submitHandler () {
@@ -51,21 +51,21 @@ export default {
       this.addMarkers(res)
       console.log(res.data.property)
     },
-    async zillowcall(house){
+    async zillowcall (house) {
       let res = await NationService.callZillowApi(house.address)
       this.house = res.data.result
     },
-    geolocate: function() {
+    geolocate: function () {
       navigator.geolocation.getCurrentPosition(position => {
         this.center = {
           lat: position.coords.latitude,
           lng: position.coords.longitude
-        };
-      });
+        }
+      })
     },
-    addMarkers(res){
-      for (var i in res.data.property){
-        var house = { 
+    addMarkers (res) {
+      for (var i in res.data.property) {
+        var house = {
           position: {
             lat: parseFloat(res.data.property[i].location.latitude),
             lng: parseFloat(res.data.property[i].location.longitude)

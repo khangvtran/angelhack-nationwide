@@ -1,26 +1,31 @@
 <template>
   <v-layout>
     <v-flex xs12 sm8 offset-sm2>
-      <v-card>
-        <v-toolbar dark color="primary">
-          <v-toolbar-title>Start Planning!</v-toolbar-title>
-        </v-toolbar>
-        <v-card-actions>
-          <v-btn :to="{ name: 'start_button' }" flat name="button">Non Nationwide Members</v-btn>
-          <form @submit="getData">
-            <input v-model="form.id" type="text">
-            <v-btn flat type="submit" name="button">Nationwide</v-btn>
-          </form>
-        </v-card-actions>
-      </v-card>
+
+      <Panel title="Start Planning!">
+        <v-container>
+          <v-card-actions>
+            <v-btn :to="{ name: 'start_button' }" name="button">Non Nationwide Members</v-btn>
+            <v-form @submit="getData">
+              <v-text-field label="Enter your Nationwide ID:" v-model="form.id" type="text"></v-text-field>
+              <v-btn type="submit" name="button">Nationwide</v-btn>
+            </v-form>
+          </v-card-actions>
+        </v-container>
+      </Panel>
+
     </v-flex>
   </v-layout>
 </template>
 
 <script>
+import Panel from '@/components/Panel'
 import NationService from '@/services/Nationwide-Api'
 export default {
   name: 'HelloWorld',
+  components: {
+    Panel
+  },
   data () {
     return {
       form: {
