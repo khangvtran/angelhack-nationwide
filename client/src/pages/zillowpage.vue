@@ -86,17 +86,26 @@ export default {
         'price': this.price
       }
       let res = await NationService.callOnboardApi(data)
-      this.addMarkers(res)
+      if (res.data.property.length < 1) {
+        alert("No propeties found")
+      } else {
+        this.addMarkers(res)
+      }
     },
     async zillowcall (house) {
       let res = await NationService.callZillowApi(house.address)
       this.house = res.data.result
-      if (this.house.zestimate.amount > +this.price) {
-        this.mortgage = Math.ceil(this.user.monthly_salary * (this.user.percent / 100))
-        this.house.wait_months = this.calcuateMortgage(this.house)
-      } else {
-        this.calcuateLowMortgage(this.house)
-      }
+      console.log(this.house)
+      try {
+        if (this.house.zestimate.amount > +this.price) {
+          this.mortgage = Math.ceil(this.user.monthly_salary * (this.user.percent / 100))
+          this.house.wait_months = this.calcuateMortgage(this.house)
+        } else {
+          this.calcuateLowMortgage(this.house)
+        }
+      } catch (error) {
+        alert("No info available")
+      }  
     },
     geolocate: function () {
       navigator.geolocation.getCurrentPosition(position => {
