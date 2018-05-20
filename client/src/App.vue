@@ -1,7 +1,9 @@
 <template>
   <v-app id="app">
-    <v-toolbar dark color="primary">
-      <v-toolbar-title>HouseFinder</v-toolbar-title>
+    <v-toolbar app flat dark class="light-blue">
+      <v-toolbar-title>
+        <router-link :to="{ name: 'HelloWorld' }">HouseFinder</router-link>
+      </v-toolbar-title>
     </v-toolbar>
     <v-content>
       <router-view/>
@@ -22,5 +24,9 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+}
+.toolbar__title a {
+  color: white;
+  text-decoration: none;
 }
 </style>

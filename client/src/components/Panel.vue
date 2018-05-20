@@ -1,6 +1,6 @@
 <template lang="html">
   <v-card class="elevation-6">
-    <v-toolbar dense dark color="primary">
+    <v-toolbar dense dark color="light-blue">
       <v-toolbar-title>{{ title }}</v-toolbar-title>
 
       <v-toolbar-items>
