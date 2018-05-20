@@ -56,6 +56,7 @@ Queries APIs and returns necessary data to serve
 + Develop a web application that caters toward a specific business problem addressed by Nationwide's
 + Learn to solve a business problem influencing a demographic largely influencing Nationwide's company goals and needs.
 + Work with a team of people from various backgrounds, separate tasks via learning goals and expertise, and collaborate effectively via a version control system (Github) and in person
++ Our platform relies on using API calls to the Nationwide and Zillow APIs to query the data when needed (as JSON objects). 
 
 
 
