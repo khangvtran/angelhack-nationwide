@@ -6,8 +6,6 @@ In [Nationwide Hackathon May 2018](http://nationwidehackathon.com/), five men ca
 
 ## Design Elements 
 
-
-
 # Front end
 
 To install dependencies for Vue.js, write
@@ -72,7 +70,10 @@ Iono
 
 + Develop a web application that answers a specific business problem addressed by Nationwide's needs
 
-+ More stuff
++ Learn to solve a business problem influencing a demographic largely influencing Nationwide's company goals and needs.
+
++ Work with a team of people from various backgrounds, separate tasks via learning goals and expertise, and collaborate effectively via a version control system (Github) and in person
+
 
 
 
