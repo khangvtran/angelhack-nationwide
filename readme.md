@@ -5,11 +5,11 @@
 At [AngelHack Nationwide](http://nationwidehackathon.com/), five men came together to produce a wondrous creation of technology: HouseFinder. A web application that aims to assist millenials in navigating the complex chore of choosing a long-term housing solution and prepare them to be responsible property buyers. With a simplistic and interactive UI, one is presented with data which corresponds to their current financial situation.
 
 <p>
-<a href="url"><img src="https://farm2.staticflickr.com/1733/27873367887_09e135a63e_z.jpg" align="left" height="440" width="210" ></a>
-<a href="url"><img src="https://farm2.staticflickr.com/1731/27873367807_1037c6e707_h.jpg" align="left" height="440" width="210" ></a>
-<a href="url"><img src="https://farm2.staticflickr.com/1729/41842743395_0b0de96286_h.jpg" align="left" height="440" width="210" ></a>
+<a href="url"><img src="https://farm2.staticflickr.com/1733/27873367887_09e135a63e_z.jpg" align="left" height="420" width="200" ></a>
+<a href="url"><img src="https://farm2.staticflickr.com/1731/27873367807_1037c6e707_h.jpg" align="left" height="420" width="200" ></a>
+<a href="url"><img src="https://farm2.staticflickr.com/1729/41842743395_0b0de96286_h.jpg" align="left" height="420" width="200" ></a>
 
-<a href="url"><img src="https://farm2.staticflickr.com/1727/41842743535_0158456be6_h.jpg" align="left" height="440" width="210" ></a>
+<a href="url"><img src="https://farm2.staticflickr.com/1727/41842743535_0158456be6_h.jpg" align="left" height="420" width="200" ></a>
 </p>
 
 
