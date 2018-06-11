@@ -4,8 +4,9 @@
 
 At [AngelHack Nationwide](http://nationwidehackathon.com/), five men came together to produce a wondrous creation of technology: HouseFinder. A web application that aims to assist millenials in navigating the complex chore of choosing a long-term housing solution and prepare them to be responsible property buyers. With a simplistic and interactive UI, one is presented with data which corresponds to their current financial situation.
 
-
+<div>
 <a href="url"><img src="https://farm2.staticflickr.com/1727/41842743535_0158456be6_h.jpg" align="left" height="557" width="280" ></a>
+</div>
 
 
 
