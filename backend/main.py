@@ -11,8 +11,8 @@ mock = "http://nw-angelhack-2018-mocks.us-east-1.elasticbeanstalk.com/"
 onBoard = "https://search.onboard-apis.com/propertyapi/v1.0.0/"
 zillow = "http://www.zillow.com/webservice/"
 app = Flask(__name__,
-    static_folder = "./../client/dist/static",
-    template_folder = "./../client/dist")
+            static_folder = "./../client/dist/static",
+            template_folder = "./../client/dist")
 CORS(app)
 
 @app.route("/")
@@ -85,6 +85,7 @@ def callZillowApi():
     resp = requests.get("https://maps.googleapis.com/maps/api/streetview", params=payload)
     print(resp.text)
     return json.dumps(json_data["response"]["results"]), 200
+    # {"Response":{"status":{"version": "1.0.0","code": "401","msg": "Unauthorized","total": "0","page": "0","pagesize": "0"}}}
 
 
 if __name__ == "__main__":

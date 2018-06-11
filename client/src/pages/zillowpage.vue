@@ -1,4 +1,3 @@
-
 <template>
   <v-layout class="zillowpage">
     <v-flex xs12>
