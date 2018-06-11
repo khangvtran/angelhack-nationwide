@@ -14,9 +14,6 @@ At [AngelHack Nationwide](http://nationwidehackathon.com/), five men came togeth
 
 
 
-
-## Design Elements 
-
 ## Build Instructions
 ```
 $ git clone ??
